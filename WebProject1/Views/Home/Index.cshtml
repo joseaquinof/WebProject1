@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model Root
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+     
+    <table id="myTable">
+
+              <tr  class="header">
+                <th>Full Name</th>
+                <th>Age</th>
+                <th>Photo</th>
+                <th>Details</th>
+              </tr>
+    @foreach(var member in Model.results)
+    {
+                    
+              <tr>
+                <td>@member.name.first @member.name.last</td>
+                <td>@member.registered.age</td>
+                <td> <img src="@member.picture.thumbnail"></td>
+                <td>@Html.ActionLink("View", "Detail", "Home", new { Name = member.name.first, LastName = member.name.last, Street = member.location.street, City = member.location.city, 
+                    State = member.location.state, PostCode = member.location.postcode, Email = member.email, Dob = member.dob.date, PhoneNumber = member.cell, PhotoLarge = member.picture.large} )</td>
+              </tr>
+
+    }
+
+   
+    </table>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
